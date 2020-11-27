@@ -5,9 +5,20 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // Create user object based on firebase
-  User _userFromFirebase(FirebaseUser user) {
+  User _userFromFirebaseUser(FirebaseUser user) {
     // PASSES THE UID OF ANON USER TO THE USER CLASS
     return user != null ? User(uid: user.uid) : null;
+  }
+
+  // auth change User stream
+
+  // THIS WILL DETECT CHANGES WETHER USER IS SIGNED IN OR NOT
+
+  Stream<User> get user {
+    return _auth.onAuthStateChanged
+        // Maps the data coming from firebase (AUTH CHANGES) to our own USER class
+        // that is own user class
+        .map(_userFromFirebaseUser);
   }
 
   // Sign in Anon
@@ -17,7 +28,7 @@ class AuthService {
       AuthResult result = await _auth.signInAnonymously();
       // GETS DATA FROM THE FIREBASE ABOUT THE ANON USER
       FirebaseUser user = result.user;
-      return _userFromFirebase(user);
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
       return null;

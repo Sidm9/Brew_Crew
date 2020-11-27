@@ -2,6 +2,7 @@ import 'package:brew_crew/modals/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
+  // THE MAIN THING!!!!!
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // Create user object based on firebase
@@ -11,7 +12,6 @@ class AuthService {
   }
 
   // auth change User stream
-
   // THIS WILL DETECT CHANGES WETHER USER IS SIGNED IN OR NOT
 
   Stream<User> get user {
@@ -21,7 +21,7 @@ class AuthService {
         .map(_userFromFirebaseUser);
   }
 
-  // Sign in Anon
+  // Sign in Anon method
   Future signInAnon() async {
     try {
       // INSTANTIATES THE OBJECT FROM THE FIREBASE INBUILT FUNCTION
@@ -35,10 +35,17 @@ class AuthService {
     }
   }
 
-  // Sign in with creds
+  // Sign in with creds method
 
   // register with email and password
 
   // Sign out method
-
+  Future signout() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }

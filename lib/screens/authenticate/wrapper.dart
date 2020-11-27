@@ -1,4 +1,4 @@
-// import 'package:brew_crew/home/home.dart';
+import 'package:brew_crew/home/home.dart';
 import 'package:brew_crew/modals/user.dart';
 import 'package:brew_crew/screens/authenticate/authenticate.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,10 @@ class Wrapper extends StatelessWidget {
 
     final user = Provider.of<User>(context);
     print(user);
-    return Authenticate();
+    if (user == null) {
+      return Authenticate();
+    } else {
+      return Home();
+    }
   }
 }

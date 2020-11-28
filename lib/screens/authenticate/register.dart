@@ -16,7 +16,7 @@ class _RegisterState extends State<Register> {
   String email = '';
   String password = '';
 
-  String error = 'mm';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -62,28 +62,22 @@ class _RegisterState extends State<Register> {
                 },
               ),
               SizedBox(height: 20),
-              RaisedButton(
-                color: (Colors.pink[400]),
+                          RaisedButton(
+                color: Colors.pink[400],
                 child: Text(
-                  "Register",
+                  'Register',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  print('ok got pressed!');
-                  // VALIDATE FUNCTION BY THE _KEY DECLARED ABOVE
-                  if (_formkey.currentState.validate()) {
-                    dynamic result =
-                        _auth.registerWithEmailAndPassword(email, password);
-                    print("This ->" + result.toString());
-                    if (result == null) {
+                  if(_formkey.currentState.validate()){
+                    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                    if(result == null) {
                       setState(() {
-                        error = 'please supply a valid email';
+                        error = 'Please supply a valid email';
                       });
                     }
-                    print(email);
-                    print(password);
                   }
-                },
+                }
               ),
               SizedBox(
                 height: 12,

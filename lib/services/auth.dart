@@ -40,16 +40,13 @@ class AuthService {
   // register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
-      // SAME AS ABOVE in ANON METHOD
-      AuthResult result = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      // THAT .user gives the uid that's we are strogin in OUR USER CLASS!!
+      AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);
-    } catch (e) {
-      print(e.toString());
+    } catch (error) {
+      print(error.toString());
       return null;
-    }
+    } 
   }
 
   // Sign out method

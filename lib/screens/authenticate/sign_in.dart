@@ -2,6 +2,12 @@ import 'package:brew_crew/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
+
+  // THIS IS CALLED FROM THE AUTHENTICATE CLASS SO AS TO 
+  // USE THAT TOGGLE FUNCTION 
+  final Function toggleView;
+  SignIn({this.toggleView});
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -19,6 +25,15 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
+        actions: <Widget>[
+          FlatButton.icon(
+            onPressed: () {
+              widget.toggleView();
+            },
+            icon: Icon(Icons.person),
+            label: Text("Register"),
+          )
+        ],
         backgroundColor: Colors.brown,
         title: Text('Sign in to brew crew'),
       ),

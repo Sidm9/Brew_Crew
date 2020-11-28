@@ -2,9 +2,8 @@ import 'package:brew_crew/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
-
-  // THIS IS CALLED FROM THE AUTHENTICATE CLASS SO AS TO 
-  // USE THAT TOGGLE FUNCTION 
+  // THIS IS CALLED FROM THE AUTHENTICATE CLASS SO AS TO
+  // USE THAT TOGGLE FUNCTION
   final Function toggleView;
   SignIn({this.toggleView});
 
@@ -14,9 +13,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
-
   // TRACK USER INPUTS IN STATE
-
   String email = '';
   String password = '';
 

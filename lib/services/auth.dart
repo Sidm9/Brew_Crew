@@ -7,7 +7,7 @@ class AuthService {
 
   // Create user object based on firebase
   User _userFromFirebaseUser(FirebaseUser user) {
-    // PASSES THE UID OF ANON USER TO THE USER CLASS
+    // PASSES THE UID OF ANON USER TO THE USER CLASS (OUR USER CLASS!!!!!!)
     return user != null ? User(uid: user.uid) : null;
   }
 
@@ -38,6 +38,19 @@ class AuthService {
   // Sign in with creds method
 
   // register with email and password
+  Future registerWithEmailAndPassword(String email, String password) async {
+    try {
+      // SAME AS ABOVE in ANON METHOD
+      AuthResult result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      // THAT .user gives the uid that's we are strogin in OUR USER CLASS!!
+      FirebaseUser user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
   // Sign out method
   Future signout() async {
